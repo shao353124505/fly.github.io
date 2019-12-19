@@ -1,0 +1,791 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Mockjs,Vue,Node," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Mock mock 介绍 目的 优点 缺点 comment   安装 mock 实现    Mockmock 介绍mockjs官方使用文档 目的方便生成随机数据，拦截Ajax请求。 &amp;emsp;&amp;emsp;偶尔会写一些前端的项目，参考一些比较知名的UI框架，里面很多例子都会把数据直接写在里面，作为参考，因此很多项目里面也会这样手写数据，直接写死在前端，将代码与mock数据紧密结合在一起，每次需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mock">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;15&#x2F;Mock&#x2F;index.html">
+<meta property="og:site_name" content="FlyPig">
+<meta property="og:description" content="Mock mock 介绍 目的 优点 缺点 comment   安装 mock 实现    Mockmock 介绍mockjs官方使用文档 目的方便生成随机数据，拦截Ajax请求。 &amp;emsp;&amp;emsp;偶尔会写一些前端的项目，参考一些比较知名的UI框架，里面很多例子都会把数据直接写在里面，作为参考，因此很多项目里面也会这样手写数据，直接写死在前端，将代码与mock数据紧密结合在一起，每次需要">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-15T03:43:37.000Z">
+<meta property="article:modified_time" content="2019-12-19T09:55:58.517Z">
+<meta property="article:author" content="Allen Shao">
+<meta property="article:tag" content="Mockjs">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="Node">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/15/Mock/"/>
+
+
+
+
+
+  <title> Mock | FlyPig </title>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyPig</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/15/Mock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Shao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyPig">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Mock
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-15T11:43:37+08:00">
+                2019-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/15/Mock/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/12/15/Mock/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><a href="#mock">Mock</a><ul>
+<li><a href="#mock-%E4%BB%8B%E7%BB%8D">mock 介绍</a><ul>
+<li><a href="#%E7%9B%AE%E7%9A%84">目的</a></li>
+<li><a href="#%E4%BC%98%E7%82%B9">优点</a></li>
+<li><a href="#%E7%BC%BA%E7%82%B9">缺点</a></li>
+<li><a href="#comment">comment</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#mock-%E5%AE%9E%E7%8E%B0">mock 实现</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Mock"><a href="#Mock" class="headerlink" title="Mock"></a>Mock</h2><h3 id="mock-介绍"><a href="#mock-介绍" class="headerlink" title="mock 介绍"></a>mock 介绍</h3><p><a href="http://mockjs.com" target="_blank" rel="noopener">mockjs官方使用文档</a></p>
+<h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><p>方便生成随机数据，拦截Ajax请求。</p>
+<p>&emsp;&emsp;偶尔会写一些前端的项目，参考一些比较知名的UI框架，里面很多例子都会把数据直接写在里面，作为参考，因此很多项目里面也会这样手写数据，直接写死在前端，将代码与mock数据紧密结合在一起，每次需要修改数据，都需要直接改动到代码层，前端本身改动就非常大，如此频繁的修改代码层面显然不是很好的实践。</p>
+<p>同时手写的数据，美观与真实性差异就看作者水平了。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>非常简单强大，入手快</li>
+<li>拦截api请求，mock出真实的前后端交互情况</li>
+<li>更改mock数据方便，与业务代码分离，频繁修改也不会有太大的危险</li>
+<li>在后端接口准备好前，通过mock接口来模拟与后台的交互，同时调整数据结构。</li>
+<li>开发过程中，mock数据也可以与后端提前讨论，引导后台的数据结构更加合理。</li>
+<li>后台开发完以后，可以一次性切换接口</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>灵活性不够，无法mock后台一些异常处理返回</li>
+<li>Build成静态文件以后线上无法使用(或许我没有找对方法)</li>
+</ul>
+<h4 id="comment"><a href="#comment" class="headerlink" title="comment"></a>comment</h4><p>&emsp; &emsp;针对第一个问题，忽然想到一种方案，或许你可以在同一个接口里面，mock不同的response，然后采用随机函数，随机的返回各种异常response，这样可以测试前端应对各种后台error作出的处理是否符合预期。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd myProject</span><br><span class="line"></span><br><span class="line">#仅安装到本地开发环境</span><br><span class="line">npm install mockjs --save-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="mock-实现"><a href="#mock-实现" class="headerlink" title="mock 实现"></a>mock 实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">src</span><br><span class="line">│       </span><br><span class="line">└───api  &#x2F;&#x2F;api文件夹，所有的接口都到单独抽出来，放在该目录下</span><br><span class="line">│       index.js  &#x2F;&#x2F;入口函数,对外暴露</span><br><span class="line">│       search.js  &#x2F;&#x2F;为每一类接口单独创建的文件，一类接口统一放在一个目录下</span><br><span class="line">│</span><br><span class="line">└───mock</span><br><span class="line">        index.js   &#x2F;&#x2F;所有的mock  api都会写在下面，如果需要，也可以拆分</span><br></pre></td></tr></table></figure>
+
+<p><em>mock/index.js</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * data mock refer to http:&#x2F;&#x2F;mockjs.com</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">const Mock &#x3D; require(&#39;mockjs&#39;);</span><br><span class="line">const util &#x3D; require(&#39;.&#x2F;util&#39;);</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; function (app) &#123;</span><br><span class="line"></span><br><span class="line">  app.get(&#39;&#x2F;mock&#x2F;v1&#x2F;search&#39;, function (rep, res) &#123;</span><br><span class="line">     let result &#x3D; &#123;</span><br><span class="line">      &quot;data|24&quot;: [&#123;</span><br><span class="line">        &quot;date&quot;: &quot;@date(&#39;yyyy-MM-dd&#39;)&quot;,</span><br><span class="line">        &quot;logNum&quot;: &quot;@natural(60, 1000)&quot;</span><br><span class="line">      &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;;</span><br><span class="line">    &#x2F;&#x2F;util.wrapResultSuccess  包装了response返回，规范统一</span><br><span class="line">    res.send(util.wrapResultSuccess(Mock.mock(result).data));</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>vue.config.js</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;vue cli3 配置文件</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    port: port,</span><br><span class="line">    open: true,</span><br><span class="line">    host: &#39;127.0.0.1&#39;,</span><br><span class="line">    https: false,</span><br><span class="line">    hotOnly: false,</span><br><span class="line">    overlay: &#123;</span><br><span class="line">      warnings: false,</span><br><span class="line">      errors: true</span><br><span class="line">    &#125;,</span><br><span class="line">  #根据当前环境，把整个mock目录加载到项目中，每次修改mock文件需要重启</span><br><span class="line">    before: process.env.ENV &#x3D;&#x3D; &#39;mock&#39; ? require(&#39;.&#x2F;src&#x2F;mock&#39;):null,</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p><em>api/index.js</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * api interface</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">import search from &#39;@&#x2F;api&#x2F;search&#39;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  search</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>api/search.js</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * article模块接口列表</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">import axios from &#39;@&#x2F;plugins&#x2F;request&#39;;</span><br><span class="line">import trend from &quot;@&#x2F;plugins&#x2F;handle&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const search &#x3D; &#123;</span><br><span class="line"></span><br><span class="line">  statusPing () &#123;</span><br><span class="line">    return axios.get(&#96;&#x2F;status_ping&#96;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;search</span><br><span class="line">  search (body) &#123;</span><br><span class="line">    return axios.get(&#96;v1&#x2F;search&#96;, body);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export default search;</span><br></pre></td></tr></table></figure>
+
+<p>utils/request.js</p>
+<p>把axiso做了一层封装，每一次前端请求都会把x-request-id带给后台，后台打印日志的时候，都会打印这个id,方便日后追踪问题，同事针对一些后台的error，可以做一些统一的处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import router from &#39;@&#x2F;pages&#x2F;login&#x2F;router&#39;;</span><br><span class="line"></span><br><span class="line">const xss &#x3D; require(&quot;xss&quot;);</span><br><span class="line"></span><br><span class="line">let instance &#x3D; axios.create(&#123;</span><br><span class="line">  timeout: 1000 * 60</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">instance.defaults.headers.post[&#39;Content-Type&#39;] &#x3D; &#39;application&#x2F;x-www-form-urlencoded&#39;;</span><br><span class="line"></span><br><span class="line">function getRandomTraceId() &#123;</span><br><span class="line">  let characters &#x3D; &#39;abcdefghijklmnopqrstuvwxyz1234567890&#39;;</span><br><span class="line">  let result &#x3D; &#39;&#39;;</span><br><span class="line">  let idLength &#x3D; 32;</span><br><span class="line"></span><br><span class="line">  try &#123;</span><br><span class="line">    for (let index &#x3D; 0; index &lt; idLength; index++) &#123;</span><br><span class="line">      result +&#x3D; characters[parseInt(Math.random() * characters.length, 10)];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    result &#x3D; &#39;getRandomTraceIdError&#39;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;**</span><br><span class="line"> * request interceptor</span><br><span class="line"> * Before each request, if token exists, carry it in the request header</span><br><span class="line"> *&#x2F;</span><br><span class="line">instance.interceptors.request.use(</span><br><span class="line">    config &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; console.log(JSON.stringify(config));</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F;add trace id for request</span><br><span class="line">      config.headers[&#39;x-request-id&#39;] &#x3D; getRandomTraceId();</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F;xss filter request url</span><br><span class="line">      config.url &#x3D; xss(config.url);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; 登录流程控制中，根据本地是否存在token判断用户的登录情况</span><br><span class="line">      &#x2F;&#x2F; 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token</span><br><span class="line">      &#x2F;&#x2F; 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码</span><br><span class="line">      &#x2F;&#x2F; 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。</span><br><span class="line">      &#x2F;&#x2F; const token &#x3D; store.state.token;</span><br><span class="line">      &#x2F;&#x2F; token &amp;&amp; (config.headers.Authorization &#x3D; token);</span><br><span class="line">      return config;</span><br><span class="line">    &#125;,</span><br><span class="line">    error &#x3D;&gt; Promise.error(error))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">instance.interceptors.response.use(</span><br><span class="line"></span><br><span class="line">    res &#x3D;&gt; res.status &#x3D;&#x3D;&#x3D; 200 ? Promise.resolve(res) : Promise.reject(res),</span><br><span class="line"></span><br><span class="line">    error &#x3D;&gt; &#123;</span><br><span class="line">      const &#123;response&#125; &#x3D; error;</span><br><span class="line">      if (response) &#123;</span><br><span class="line">        errorHandle(response.status, response.data.message);</span><br><span class="line">        return Promise.reject(response);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        &#x2F;&#x2F; 处理断网的情况</span><br><span class="line">        &#x2F;&#x2F; eg:请求超时或断网时，更新state的network状态</span><br><span class="line">        &#x2F;&#x2F; network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏</span><br><span class="line">        &#x2F;&#x2F; 关于断网组件中的刷新重新获取数据，会在断网组件中说明</span><br><span class="line">        if (!window.navigator.onLine) &#123;</span><br><span class="line">          &#x2F;&#x2F; store.commit(&#39;changeNetwork&#39;, false);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          return Promise.reject(error);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">export default instance;</span><br></pre></td></tr></table></figure>
+<p>—<em>main.js</em></p>
+<p>直接把api类挂载到vue上，这样方便使用，也可以直接到使用类里面去引入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import api from &#39;@&#x2F;api&#39;</span><br><span class="line"></span><br><span class="line">Vue.prototype.$api &#x3D; api;</span><br><span class="line"></span><br><span class="line">window.APP&#x3D;new Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  i18n,</span><br><span class="line">  api,</span><br><span class="line">  store,</span><br><span class="line">  render: h &#x3D;&gt; h(App)</span><br><span class="line">&#125;).$mount(&#39;#app&#39;)</span><br></pre></td></tr></table></figure>
+
+<p><em>how to use</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async getData()&#123;</span><br><span class="line">     let response &#x3D; await this.$api.search.search(request);</span><br><span class="line">       if (response.status &#x3D;&#x3D; 200 &amp;&amp; response.data.data) &#123;</span><br><span class="line">       console.log(&#96;response.data.data &#x3D; &amp;&#123;response.data.data&#125;&#96;);</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mockjs/" rel="tag"># Mockjs</a>
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+            <a href="/tags/Node/" rel="tag"># Node</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/15/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/" rel="next" title="事务隔离">
+                <i class="fa fa-chevron-left"></i> 事务隔离
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/19/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95%E4%B8%8A/" rel="prev" title="深入浅出索引上">
+                深入浅出索引上 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/12/15/Mock/"
+           data-title="Mock" data-url="http://yoursite.com/2019/12/15/Mock/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Allen Shao" />
+          <p class="site-author-name" itemprop="name">Allen Shao</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="your-github-url" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="your-twitter-url" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mock"><span class="nav-number">1.</span> <span class="nav-text">Mock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mock-介绍"><span class="nav-number">1.1.</span> <span class="nav-text">mock 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目的"><span class="nav-number">1.1.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">1.1.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">1.1.3.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#comment"><span class="nav-number">1.1.4.</span> <span class="nav-text">comment</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mock-实现"><span class="nav-number">1.3.</span> <span class="nav-text">mock 实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Shao</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"your-duoshuo-shortname"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
